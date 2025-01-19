@@ -7,8 +7,6 @@ import dotenv from 'dotenv'
 dotenv.config();
 const apiKey = process.env.API_KEY;
 
-console.log(apiKey);
-
 const app = express();
 const port = 8080;
 
