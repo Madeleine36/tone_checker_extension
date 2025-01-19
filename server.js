@@ -30,7 +30,7 @@ app.post('/translate', async (req, res) => {
     var prompt = preprompt + req.body;
 
     var result = await model.generateContent(prompt);
-    console.log(result.response.text());
+    console.log(result.response.text().substring(7, result.response.text().length-4));
 
-    res.send(result.response.text());
+    res.send(result.response.text().substring(7, result.response.text().length-4));
 })
