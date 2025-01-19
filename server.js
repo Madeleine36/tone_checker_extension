@@ -38,7 +38,7 @@ app.post('/translate/:level', async (req, res) => {
     console.log(lvl);
 
     var prompt = preprompt + req.body;
-    // console.log("prompting with prompt: " + prompt)
+    console.log("prompting with prompt: " + prompt)
 
     var result = await model.generateContent(prompt);
 
@@ -48,6 +48,6 @@ app.post('/translate/:level', async (req, res) => {
     lines.pop();
     var finstr = lines.join('\n');
   
-    // console.log("response gotten: " + finstr);
+    console.log("response gotten: " + finstr);
     res.send(finstr);
 })

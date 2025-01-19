@@ -6,15 +6,18 @@ async function main() {
 
   level = 0
   await chrome.storage.local.get(['toneLevel']).then((res) => {
-      console.log('Settings retrieved', res);
-      console.log(res.toneLevel);
       level = res.toneLevel;
   });
   if (typeof level == "undefined") level = 0;
   console.log("this is level: " + level);
 
-  for (var text in docTexts) totalreq.push(String(text.innerHTML));
+  console.log(docTexts)
 
+  for (var i = 0; i < docTexts.length; i++) totalreq.push(String(docTexts[i].innerHTML));
+
+  console.log(totalreq)
+
+  // fetch
   var response = await fetch(`http://localhost:8080/translate/${level}`, {
       method: 'POST',
       headers: {
@@ -22,11 +25,11 @@ async function main() {
       },
       body: JSON.stringify(totalreq),
     });
-
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-  data = response.text();
+  data = await response.text();
   listdata = JSON.parse(data);
-  for (var text in docTexts) text.innerHTML = listdata[i];
+
+  for (var i = 0; i < docTexts.length; i++) docTexts[i].innerHTML = listdata[i];
 }
 
 main();
