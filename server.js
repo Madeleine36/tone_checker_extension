@@ -26,12 +26,16 @@ app.listen(port, () => {
 
 app.use(bodyParser.text());
 
-app.post('/translate', async (req, res) => {
+app.post('/translate/:level', async (req, res) => {
     if (typeof req.body == "undefined" || req.body.length  < 10) {
         console.log("small request, not using ai");
         res.send(req.body);
         return;
     }
+
+    var lvl = req.params.level;
+    console.log("level is ");
+    console.log(lvl);
 
     var prompt = preprompt + req.body;
     console.log("prompting with prompt: " + prompt)
