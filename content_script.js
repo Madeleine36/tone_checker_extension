@@ -1,15 +1,10 @@
-console.log("hello from content_script");
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const genAI = new GoogleGenerativeAI("AIzaSyB5ejtB_QpueazK_KIKxBNFCZ0Vu-Arc9c");
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-const prompt = "Rephrase this text to be less emotionally intense, by about 3 points on a scale from 1 to 10: now that enough time has passed putting “the last scene” music in sonic 3 was extremely criminal due to being a targeted attack on my emotions";
-
-const result = model.generateContent(prompt);
-console.log(result.response.text());
 const text = document.querySelectorAll('h1, h2, h3, h4, h5, p, li, td, caption, span, a')
+
+var totalreq = []
+
 for (let i=0; i < text.length; i++) {
+    totalreq.push(String(text[i].innerHTML));
+
     // my new code here
     // this is where we'd edit an individual chunk of text
     if (text[i].innerHTML.includes ('Tom Brady')) {
@@ -18,3 +13,25 @@ for (let i=0; i < text.length; i++) {
     text[i].innerHTML = text[i].innerHTML.replace('Brady', '6-time Super Bowl champion Tom Brady')
     }
 }
+
+
+
+fetch('http://localhost:8080/translate', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+    body: JSON.stringify(totalreq),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then((data) => {
+      console.log('Response from server: ', data);
+    })
+    .catch((error) => {
+      console.error('hey this is your Error:', error);
+    });
