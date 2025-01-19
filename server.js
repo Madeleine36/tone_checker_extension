@@ -9,7 +9,7 @@ const port = 8080;
 
 const genAI = new GoogleGenerativeAI("AIzaSyB5ejtB_QpueazK_KIKxBNFCZ0Vu-Arc9c");
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-const preprompt_instructions = "I will give you the inputs as a list of strings, please have the outputs be a list of strings as well, using double quotes:";
+const preprompt_instructions = "I will give you the inputs as a list of strings, please have the outputs be a list of strings with the same length, using double quotes:";
 const preprompt_minus_one = "Rephrase this text to be somewhat less emotionally intense, by about 3 points on a scale from 1 to 10. " + preprompt_instructions;
 const preprompt_minus_two = "Rephrase this text to be totally neutral, unbiased, and nonchalant. " + preprompt_instructions;
 const preprompt_one = "Rephrase this text to be somewhat more emotional and negative, by about 3 points on a scale from 1 to 10. " + preprompt_instructions;
@@ -30,6 +30,7 @@ app.listen(port, () => {
 app.use(bodyParser.text());
 
 app.post('/translate/:level', async (req, res) => {
+    console.log("Query recieved")
     if (typeof req.body == "undefined" || req.body.length  < 10) {
         console.log("small request, not using ai");
         res.send(req.body);
@@ -62,6 +63,11 @@ app.post('/translate/:level', async (req, res) => {
             prompt = preprompt_minus_one + req.body;
     }
 
+    if (lvl == 0) {
+        console.log("Level is 0, returning same as query")
+        res.send(req.body);
+        return;
+    }
 
     // var prompt = preprompt + req.body;
     console.log("prompting with prompt: " + prompt)

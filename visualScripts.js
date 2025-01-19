@@ -3,15 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const toneValue = document.getElementById('toneValue');
     const applyButton = document.getElementById('applyButton');
 
-
-    // Update tone value when slider changes
-    slider.addEventListener('input', function() {
-        toneValue.textContent = this.value;
-    });
-
     // this doesn't print to console but it still runs!
     applyButton.addEventListener("click", () => {
-        console.log("sdfgadfhaergf " + slider.value);
+        toneValue.textContent = slider.value;
         chrome.storage.local.set({'toneLevel': slider.value }, function() {
             console.log("saved value");
             console.log(slider.value);

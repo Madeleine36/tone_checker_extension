@@ -1,4 +1,4 @@
-const selectFrom = ['H1', 'H2', 'H3', 'H4', 'H5', 'P', 'LI', 'TD', 'CAPTION', 'SPAN', 'A', 'ASIDE', 'BLOCKQUOTE'];
+const selectFrom = ['H1', 'H2', 'H3', 'H4', 'H5', 'P', 'LI', 'TD', 'CAPTION', 'SPAN', 'ASIDE', 'BLOCKQUOTE']; // removed 'a'
 
 
 async function main() {
@@ -25,8 +25,11 @@ async function main() {
   });
   if (typeof level == "undefined") level = 0;
   console.log("this is level: " + level);
-  if (level === '0') return;
-
+  if (level === '0') {
+    console.log("Level is 0, make no changes");
+    return;
+  }
+  
   var totalreq = [];
   for (var i = 0; i < elementsWithText.length; i++) totalreq.push(elementsWithText[i][1]);
   
@@ -37,6 +40,9 @@ async function main() {
       },
       body: JSON.stringify(totalreq),
     });
+
+  console.log("Response recieved");
+
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   data = await response.text();
   console.log(typeof data);
@@ -45,7 +51,7 @@ async function main() {
 
   console.log(listdata);
 
-  for (var i = 0; i < elementsWithText.length; i++) elementsWithText[i][0].innerHTML = listdata[i];
+  for (var i = 0; i < elementsWithText.length; i++) elementsWithText[i][0].innerText = listdata[i];
 }
 
 main();
