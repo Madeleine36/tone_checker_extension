@@ -1,6 +1,15 @@
 const text = document.querySelectorAll('h1, h2, h3, h4, h5, p, li, td, caption, span, a, aside, blockquote')
 var totalreq = []
-level = document.getElementById('toneSlider').value;
+
+level = 0
+chrome.storage.sync.get(['toneLevel'], function(items) {
+    console.log('Settings retrieved', items);
+    console.log(items.toneLevel);
+    level = items.toneLevel;
+  });
+
+console.log("this is level");
+console.log(level);
 
 for (let i=0; i < text.length; i++) {
     totalreq.push(String(text[i].innerHTML));
