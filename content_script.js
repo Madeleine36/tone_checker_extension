@@ -15,7 +15,7 @@ async function main() {
 
   for (var text in docTexts) totalreq.push(String(text.innerHTML));
 
-  var response = await fetch(`http://localhost:8080/translate/?${level}`, {
+  var response = await fetch(`http://localhost:8080/translate/${level}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'text/plain',
