@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: beige;
+    color: #660000;
+    width: 300px;
+    padding: 20px;
+    margin: 0;
+  }
+  
+  .container {
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  
+  h2 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  
+  .slider-container {
+    margin-bottom: 20px;
+  }
+  
+  #toneSlider {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  #applyButton {
+    background-color: #660000;
+    color: beige;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #applyButton:hover {
+    background-color: #990000;
+  }
+  
+  /* Slider styles */
+  #toneSlider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+  }
+  
+  #toneSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: url('chill_guy_transparent.png') no-repeat center center;
+    background-size: cover;
+    cursor: pointer;
+  }
+  
+  #toneSlider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: url('chill_guy_transparent.png') no-repeat center center;
+    background-size: cover;
+    cursor: pointer;
