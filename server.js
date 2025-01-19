@@ -9,7 +9,7 @@ const port = 8080;
 
 const genAI = new GoogleGenerativeAI("AIzaSyB5ejtB_QpueazK_KIKxBNFCZ0Vu-Arc9c");
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-const preprompt = "Rephrase this text to be less emotionally intense, by about 3 points on a scale from 1 to 10. I will give you the inputs as a JSON list, please have the outputs be a JSON list as well:";
+const preprompt = "Rephrase this text to be less emotionally intense, by about 3 points on a scale from 1 to 10. I will give you the inputs as a list of strings, please have the outputs be a list of strings as well:";
 
 app.use(cors());
 app.use(cors({
@@ -27,10 +27,23 @@ app.listen(port, () => {
 app.use(bodyParser.text());
 
 app.post('/translate', async (req, res) => {
+    if (typeof req.body == "undefined" || req.body.length  < 10) {
+        console.log("small request, not using ai");
+        res.send(req.body);
+        return;
+    }
+
     var prompt = preprompt + req.body;
+    console.log("prompting with prompt: " + prompt)
 
     var result = await model.generateContent(prompt);
-    console.log(result.response.text());
 
-    res.send(result.response.text());
+    var lines = (result.response.text()).split('\n');
+    lines.shift();
+    lines.pop();
+    lines.pop();
+    var finstr = lines.join('\n');
+
+    console.log("response gotten: " + finstr);
+    res.send(finstr);
 })
