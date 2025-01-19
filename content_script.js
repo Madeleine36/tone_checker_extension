@@ -1,42 +1,35 @@
-const text = document.querySelectorAll('h1, h2, h3, h4, h5, p, li, td, caption, span, a, aside, blockquote')
-var totalreq = []
-level = document.getElementById('toneSlider').value;
 
-for (let i=0; i < text.length; i++) {
-    totalreq.push(String(text[i].innerHTML));
+async function main() {
 
-    // my new code here
-    // this is where we'd edit an individual chunk of text
-    if (text[i].innerHTML.includes ('Tom Brady')) {
-        text[i].innerHTML = text[i].innerHTML.replace('Tom Brady', '6-time Super Bowl champion Tom Brady')
-    } else if (text[i].innerHTML.includes ('Brady')) {
-    text[i].innerHTML = text[i].innerHTML.replace('Brady', '6-time Super Bowl champion Tom Brady')
-    }
+  const docTexts = document.querySelectorAll('h1, h2, h3, h4, h5, p, li, td, caption, span, a, aside, blockquote')
+  var totalreq = []
+
+  level = 0
+  await chrome.storage.local.get(['toneLevel']).then((res) => {
+      level = res.toneLevel;
+  });
+  if (typeof level == "undefined") level = 0;
+  console.log("this is level: " + level);
+
+  console.log(docTexts)
+
+  for (var i = 0; i < docTexts.length; i++) totalreq.push(String(docTexts[i].innerHTML));
+
+  console.log(totalreq)
+
+  // fetch
+  var response = await fetch(`http://localhost:8080/translate/${level}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+      body: JSON.stringify(totalreq),
+    });
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+  data = await response.text();
+  listdata = JSON.parse(data);
+
+  for (var i = 0; i < docTexts.length; i++) docTexts[i].innerHTML = listdata[i];
 }
 
-
-
-fetch(`http://localhost:8080/translate/?${level}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'text/plain',
-    },
-    body: JSON.stringify(totalreq),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.text();
-    })
-    .then((data) => {
-        console.log('Response from server: ', data);
-        listdata = JSON.parse(data)
-        for (let i=0; i < text.length; i++) {
-            text[i].innerHTML = listdata[i]
-        }
-      
-    })
-    .catch((error) => {
-      console.error('hey this is your Error:', error);
-    });
+main();
