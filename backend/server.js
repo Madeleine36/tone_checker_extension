@@ -2,12 +2,18 @@ import express from 'express';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dotenv from 'dotenv'
+
+dotenv.config();
+const apiKey = process.env.API_KEY;
+
+console.log(apiKey);
 
 const app = express();
 const port = 8080;
 
 
-const genAI = new GoogleGenerativeAI("AIzaSyB5ejtB_QpueazK_KIKxBNFCZ0Vu-Arc9c");
+const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const preprompt_instructions = "I will give you the inputs as a list of strings, please have the outputs be a list of strings as well, using double quotes:";
 const preprompt_minus_one = "Rephrase this text to be somewhat less emotionally intense, by about 3 points on a scale from 1 to 10. " + preprompt_instructions;

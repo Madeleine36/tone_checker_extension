@@ -1,4 +1,4 @@
-const selectFrom = ['H1', 'H2', 'H3', 'H4', 'H5', 'P', 'LI', 'TD', 'CAPTION', 'SPAN', 'A', 'ASIDE', 'BLOCKQUOTE'];
+const selectFrom = ['H1', 'H2', 'H3', 'H4', 'H5', 'P', 'LI'];
 
 
 async function main() {
@@ -6,14 +6,16 @@ async function main() {
   var elementsWithText = [];
   let elements = document.body.querySelectorAll('*');
   elements.forEach(element => {
-    //console.log(`looking at: ${element.innerHTML}`);
-    //console.log(`tag: ${element.tagName} type: ${typeof element.tagName}`);
+    // console.log(element);
+    // console.log(element.TEXT_NODE);
+    // console.log(`looking at: ${element.innerHTML}`);
+    // console.log(`tag: ${element.tagName} type: ${typeof element.tagName}`);
     if (typeof element.innerText !== "undefined" &&
         element.innerText.trim() !== '' && 
         element !== document.body && 
         selectFrom.includes(element.tagName)) {
 
-        elementsWithText.push([element, element.innerText.trim()]);
+        elementsWithText.push([element, element.innerHTML.trim()]);
     }
   });
 
