@@ -1,6 +1,6 @@
 const text = document.querySelectorAll('h1, h2, h3, h4, h5, p, li, td, caption, span, a, aside, blockquote')
-
 var totalreq = []
+level = document.getElementById('toneSlider').value;
 
 for (let i=0; i < text.length; i++) {
     totalreq.push(String(text[i].innerHTML));
@@ -16,7 +16,7 @@ for (let i=0; i < text.length; i++) {
 
 
 
-fetch('http://localhost:8080/translate', {
+fetch(`http://localhost:8080/translate/?${level}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'text/plain',
