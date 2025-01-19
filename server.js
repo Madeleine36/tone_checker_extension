@@ -9,10 +9,10 @@ const port = 8080;
 
 const genAI = new GoogleGenerativeAI("AIzaSyB5ejtB_QpueazK_KIKxBNFCZ0Vu-Arc9c");
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-const preprompt_instructions = "I will give you the inputs as a list of strings, please have the outputs be a list of strings with the same length, using double quotes:";
+const preprompt_instructions = "I will give you the inputs as a json style list of strings, please have the outputs be a json list of strings with the same length, using double quotes:";
 const preprompt_minus_one = "Rephrase this text to be somewhat less emotionally intense, by about 3 points on a scale from 1 to 10. " + preprompt_instructions;
 const preprompt_minus_two = "Rephrase this text to be totally neutral, unbiased, and nonchalant. " + preprompt_instructions;
-const preprompt_one = "Rephrase this text to be somewhat more emotional and negative, by about 3 points on a scale from 1 to 10. " + preprompt_instructions;
+const preprompt_one = "Rephrase this text to be somewhat more emotional and hostile, by about 3 points on a scale from 1 to 10. " + preprompt_instructions;
 const preprompt_two = "Rephrase this text to be way more emotional, and hostile (it's okay to use profanity). " + preprompt_instructions;
 app.use(cors());
 app.use(cors({
