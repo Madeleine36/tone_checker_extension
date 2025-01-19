@@ -11,7 +11,7 @@ const genAI = new GoogleGenerativeAI("AIzaSyB5ejtB_QpueazK_KIKxBNFCZ0Vu-Arc9c");
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const preprompt = "Rephrase this text to be less emotionally intense, by about 3 points on a scale from 1 to 10. I will give you the inputs as a list of strings, please have the outputs be a list of strings as well:";
 const preprompt_minus_one = "Rephrase this text to be somewhat less emotionally intense, by about 3 points on a scale from 1 to 10. I will give you the inputs as a list of strings, please have the outputs be a list of strings as well:";
-const preprompt_minus_two = "Rephrase this text to be totally neutral, unbiased, and nonchalant. I will give you the inputs as a list of strings, please have the outputs be a list of strings as well:"
+const preprompt_minus_two = "Rephrase this text to be totally neutral, unbiased, and nonchalant. I will give you the inputs as a list of strings, please have the outputs be a list of strings as well, using double quote marks:"
 const preprompt_one = "Rephrase this text to be somewhat more emotional and negative, by about 3 points on a scale from 1 to 10. I will give you the inputs as a list of strings, please have the outputs be a list of strings as well:"
 const preprompt_two = "Rephrase this text to be way more emotional, and hostile (it's okay to use profanity). I will give you the inputs as a list of strings, please have the outputs be a list of strings as well:"
 app.use(cors());
