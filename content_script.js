@@ -1,4 +1,4 @@
-const selectFrom = ['H1', 'H2', 'H3', 'H4', 'H5', 'P', 'LI', 'TD', 'CAPTION', 'SPAN', 'ASIDE', 'BLOCKQUOTE']; // removed 'a'
+const selectFrom = ['H1', 'H2', 'H3', 'H4', 'H5', 'P', 'LI'];
 
 
 async function main() {
@@ -6,14 +6,16 @@ async function main() {
   var elementsWithText = [];
   let elements = document.body.querySelectorAll('*');
   elements.forEach(element => {
-    //console.log(`looking at: ${element.innerHTML}`);
-    //console.log(`tag: ${element.tagName} type: ${typeof element.tagName}`);
+    // console.log(element);
+    // console.log(element.TEXT_NODE);
+    // console.log(`looking at: ${element.innerHTML}`);
+    // console.log(`tag: ${element.tagName} type: ${typeof element.tagName}`);
     if (typeof element.innerText !== "undefined" &&
         element.innerText.trim() !== '' && 
         element !== document.body && 
         selectFrom.includes(element.tagName)) {
 
-        elementsWithText.push([element, element.innerText.trim()]);
+        elementsWithText.push([element, element.innerHTML.trim()]);
     }
   });
 
@@ -25,11 +27,7 @@ async function main() {
   });
   if (typeof level == "undefined") level = 0;
   console.log("this is level: " + level);
-  if (level === '0') {
-    console.log("Level is 0, make no changes");
-    return;
-  }
-  
+  if (level == '0') return;
   var totalreq = [];
   for (var i = 0; i < elementsWithText.length; i++) totalreq.push(elementsWithText[i][1]);
   
