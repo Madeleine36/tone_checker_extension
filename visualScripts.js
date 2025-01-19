@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         toneValue.textContent = this.value;
     });
 
+    // this doesn't print to console but it still runs!
     applyButton.addEventListener("click", () => {
         console.log("sdfgadfhaergf " + slider.value);
         chrome.storage.local.set({'toneLevel': slider.value }, function() {
