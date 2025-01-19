@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     applyButton.addEventListener("click", () => {
         console.log("sdfgadfhaergf " + slider.value);
-        chrome.storage.sync.set({ 'toneLevel': slider.value }, function() {
-            console.log("saving value");
+        chrome.storage.local.set({'toneLevel': slider.value }, function() {
+            console.log("saved value");
             console.log(slider.value);
         });
     });
