@@ -6,8 +6,10 @@ async function main() {
   var elementsWithText = [];
   let elements = document.body.querySelectorAll('*');
   elements.forEach(element => {
-    console.log(`looking at: ${element.innerHTML}`);
-    console.log(`tag: ${element.tagName} type: ${typeof element.tagName}`);
+    // console.log(element);
+    // console.log(element.TEXT_NODE);
+    // console.log(`looking at: ${element.innerHTML}`);
+    // console.log(`tag: ${element.tagName} type: ${typeof element.tagName}`);
     if (typeof element.innerText !== "undefined" &&
         element.innerText.trim() !== '' && 
         element !== document.body && 
