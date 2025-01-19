@@ -8,7 +8,8 @@ async function main() {
   elements.forEach(element => {
     //console.log(`looking at: ${element.innerHTML}`);
     //console.log(`tag: ${element.tagName} type: ${typeof element.tagName}`);
-    if (element.innerText.trim() !== '' && 
+    if (typeof element.innerText !== "undefined" &&
+        element.innerText.trim() !== '' && 
         element !== document.body && 
         selectFrom.includes(element.tagName)) {
 
@@ -38,7 +39,11 @@ async function main() {
     });
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   data = await response.text();
+  console.log(typeof data);
+
   listdata = JSON.parse(data);
+
+  console.log(listdata);
 
   for (var i = 0; i < elementsWithText.length; i++) elementsWithText[i][0].innerHTML = listdata[i];
 }

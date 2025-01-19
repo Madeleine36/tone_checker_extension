@@ -16,7 +16,7 @@ const preprompt_one = "Rephrase this text to be somewhat more emotional and nega
 const preprompt_two = "Rephrase this text to be way more emotional, and hostile (it's okay to use profanity). I will give you the inputs as a list of strings, please have the outputs be a list of strings as well:"
 app.use(cors());
 app.use(cors({
-    origin: 'https://motherfuckingwebsite.com',
+    origin: '*',
   }));  
 
 app.get('/', (req, res) => {
@@ -68,12 +68,10 @@ app.post('/translate/:level', async (req, res) => {
 
     var result = await model.generateContent(prompt);
 
-    var lines = (result.response.text()).split('\n');
-    lines.shift();
-    lines.pop();
-    lines.pop();
-    var finstr = lines.join('\n');
-  
-    console.log("response gotten: " + finstr);
-    res.send(finstr);
+    var base = result.response.text();
+    var frontTrimmed = base.substring(base.indexOf('['));
+    var trimmed = frontTrimmed.substring(0, frontTrimmed.lastIndexOf(']') + 1);
+
+    console.log("\n\n\n\n\n\n\nresponse gotten: " + trimmed);
+    res.send(trimmed);
 })
