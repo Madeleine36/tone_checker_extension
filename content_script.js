@@ -8,7 +8,8 @@ async function main() {
   elements.forEach(element => {
     //console.log(`looking at: ${element.innerHTML}`);
     //console.log(`tag: ${element.tagName} type: ${typeof element.tagName}`);
-    if (element.innerText.trim() !== '' && 
+    if (typeof element.innerText !== "undefined" &&
+        element.innerText.trim() !== '' && 
         element !== document.body && 
         selectFrom.includes(element.tagName)) {
 
@@ -24,6 +25,7 @@ async function main() {
   });
   if (typeof level == "undefined") level = 0;
   console.log("this is level: " + level);
+  if (level === '0') return;
 
   var totalreq = [];
   for (var i = 0; i < elementsWithText.length; i++) totalreq.push(elementsWithText[i][1]);
@@ -37,7 +39,11 @@ async function main() {
     });
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   data = await response.text();
+  console.log(typeof data);
+
   listdata = JSON.parse(data);
+
+  console.log(listdata);
 
   for (var i = 0; i < elementsWithText.length; i++) elementsWithText[i][0].innerHTML = listdata[i];
 }
