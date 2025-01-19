@@ -25,7 +25,7 @@ async function main() {
   });
   if (typeof level == "undefined") level = 0;
   console.log("this is level: " + level);
-  if (level === '0') return;
+  if (level == '0') return;
 
   var totalreq = [];
   for (var i = 0; i < elementsWithText.length; i++) totalreq.push(elementsWithText[i][1]);
