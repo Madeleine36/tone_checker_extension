@@ -1,4 +1,4 @@
-const selectFrom = ['H1', 'H2', 'H3', 'H4', 'H5', 'P', 'LI'];
+const selectFrom = ['H1', 'H2', 'H3', 'H4', 'H5', 'P', 'LI', 'ASIDE', 'BLOCKQUOTE'];
 
 
 async function main() {

@@ -4,12 +4,11 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config({path:"..\\.env"});
 const apiKey = process.env.API_KEY;
 
 const app = express();
 const port = 8080;
-
 
 const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
