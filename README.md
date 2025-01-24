@@ -5,6 +5,8 @@ This extension aims to reduce the highly polarized political atmosphere online.
 It leaverages Google Gemini's API to automatically rephrase texts online to be less hostile, and to promote calmer and more rational discussion.
 
 ---
+![a photo of a google search reult, where all the text of the results has been replaced with aggressive and profane versions](example.jpg "Example of +2 mode")
+---
 
 This extension requires you to have a Gemini API key
 
